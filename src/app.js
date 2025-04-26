@@ -5,6 +5,9 @@ require('dotenv').config()
 require("./database/connection")
 const bookRoute = require("./routes/bookRoute")
 
+app.use(express.urlencoded({extended : true})) // ssr 
+app.use(express.json()) // external like react, vuejs 
+
 
 app.use("/api/book",bookRoute)
 
