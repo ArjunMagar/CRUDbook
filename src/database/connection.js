@@ -20,7 +20,7 @@ db.Sequelize = Sequelize;
 db.sequelize = sequelize;
 
 // importing model files 
-db.books = require("./models/Book")(sequelize, DataTypes);
+db.Books = require("./models/Book")(sequelize, DataTypes);
 
 
 sequelize.sync({ force: false }).then(() => {

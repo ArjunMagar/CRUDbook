@@ -9,7 +9,7 @@ app.use(express.urlencoded({extended : true})) // ssr
 app.use(express.json()) // external like react, vuejs 
 
 
-app.use("/api/book",bookRoute)
+app.use("/api",bookRoute)
 
 
 
