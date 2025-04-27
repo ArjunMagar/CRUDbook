@@ -1,15 +1,21 @@
 const { Books } = require("../database/connection")
 
 exports.addBook = async (req, res) => {
+
+
     try {
         const { title, author, publication, price, description } = req.body
+        
+        // const fileName = req.file?.filename || "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?q=80&w=1000&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8aGVhZHBob25lfGVufDB8fDB8fHww";
+        const fileName = req.file ? req.file.filename : "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?q=80&w=1000&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8aGVhZHBob25lfGVufDB8fDB8fHww"
+
         if (!title | !author | !publication | !price | !description) {
             return res.status(400).json({
                 message: "Please!  insert title, author, publication, price, description"
             })
         }
         const newData = await Books.create({
-            title, author, publication, price, description
+            title, author, publication, price, description, image: fileName
         })
 
         res.status(201).json({
@@ -84,10 +90,10 @@ exports.updateBookById = async (req, res) => {
             })
         }
         await existedData.update(updates)
-        
+
         res.status(200).json({
             message: "Book updated successfully",
-            data:existedData
+            data: existedData
         })
 
     } catch (error) {
